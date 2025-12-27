@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diệp N. | Vietnamese Tutor</title>
+  <style>
+    :root{
+      --bg:#7b63e6;
+      --bg-2:#6a54d8;
+      --ink:#111827;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --line:#e8e7ff;
+      --accent:#7b63e6;
+      --btn:#6d57df;
+      --btn-2:#5b48cc;
+      --shadow: 0 18px 45px rgba(17,24,39,.14);
+      --radius: 18px;
+      --radius-2: 26px;
+      --max: 1120px;
+      --ring: 0 0 0 4px rgba(123,99,230,.18);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 55%, #ffffff 55%, #ffffff 100%);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    .topbar{
+      padding:14px 0;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      letter-spacing:.2px;
+      opacity:.95;
+    }
+
+    .shell{
+      margin: 14px auto 26px;
+      background: var(--card);
+      border-radius: var(--radius-2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.35);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 22px;
+      gap:12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:.3px;
+    }
+    .brand .dot{
+      width:14px;height:14px;border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #fff 0 25%, #ffd54a 26% 60%, #2d6bff 61% 100%);
+      box-shadow: 0 6px 14px rgba(0,0,0,.12);
+    }
+    .navlinks{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:#374151;
+      font-weight:600;
+      font-size:14px;
+    }
+    .navlinks a{opacity:.92}
+    .navlinks a:hover{opacity:1}
+    .navcta{
+      display:flex; align-items:center; gap:10px;
+    }
+    .pill{
+      display:flex; align-items:center; gap:10px;
+      background: #eef2ff;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      color:#2f2a56;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .pill .ping{
+      width:10px;height:10px;border-radius:999px;
+      background:#ffd54a;
+      box-shadow: 0 0 0 4px rgba(255,213,74,.25);
+    }
+    .btn{
+      border:0;
+      background: linear-gradient(180deg, var(--btn) 0%, var(--btn-2) 100%);
+      color:#fff;
+      font-weight:800;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      box-shadow: 0 12px 22px rgba(91,72,204,.22);
+    }
+    .btn:hover{filter:brightness(1.02)}
+    .btn:active{transform:translateY(1px)}
+    .btn-outline{
+      background:#fff;
+      color:#2f2a56;
+      border:1px solid var(--line);
+      box-shadow:none;
+      font-weight:800;
+    }
+
+    .hero{
+      position:relative;
+      padding: 22px 22px 10px;
+      background:
+        radial-gradient(1200px 500px at 25% 35%, rgba(167,139,250,.22), transparent 60%),
+        radial-gradient(900px 480px at 75% 45%, rgba(123,99,230,.18), transparent 55%),
+        #fbfbff;
+      border-top:1px solid rgba(232,231,255,.7);
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:22px;
+      align-items:center;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow: 0 10px 25px rgba(17,24,39,.06);
+      font-weight:800;
+      color:#2f2a56;
+      width:fit-content;
+    }
+    .kicker .miniDot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(180deg,#ffd54a,#f5b700);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(36px, 4.6vw, 54px);
+      line-height:1.03;
+      letter-spacing:-.8px;
+    }
+    .hl{
+      background: linear-gradient(180deg, rgba(167,139,250,.0) 0 42%, rgba(167,139,250,.30) 43% 100%);
+      border-radius:14px;
+      padding:0 10px;
+      display:inline-block;
+    }
+    .sub{
+      color:#4b5563;
+      font-size:16px;
+      line-height:1.55;
+      max-width: 52ch;
+    }
+    .ctaRow{
+      margin-top:16px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .watch{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-weight:800;
+      color:#2f2a56;
+      cursor:pointer;
+    }
+    .watch:hover{box-shadow: var(--ring)}
+    .playIcon{
+      width:34px;height:34px;border-radius:999px;
+      display:grid;place-items:center;
+      background: linear-gradient(180deg, rgba(123,99,230,.12), rgba(123,99,230,.22));
+      border:1px solid rgba(123,99,230,.25);
+    }
+    .playIcon svg{transform:translateX(1px)}
+    .quote{
+      margin-top:18px;
+      border-left:4px solid rgba(123,99,230,.25);
+      padding-left:14px;
+      color:#374151;
+    }
+    .quote b{display:block; margin-top:8px; color:#111827}
+
+    /* ✅ profile picture back */
+    .portraitWrap{
+      position:relative;
+      display:grid;
+      place-items:center;
+      padding: 16px 0;
+    }
+    .portraitCircle{
+      width:min(380px, 84%);
+      aspect-ratio:1/1;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(123,99,230,.18), rgba(123,99,230,.02) 65%),
+                  #efeaff;
+      border:1px solid rgba(232,231,255,.9);
+      position:absolute;
+      z-index:0;
+      filter: drop-shadow(0 20px 34px rgba(17,24,39,.10));
+    }
+    .portrait{
+      width:min(360px, 82%);
+      aspect-ratio: 3 / 4;
+      border-radius: 22px;
+      z-index:1;
+      box-shadow: 0 22px 50px rgba(17,24,39,.18);
+      border: 6px solid rgba(255,255,255,.88);
+      object-fit: cover;
+      background:#fff;
+    }
+    .floatBadge{
+      position:absolute;
+      right: 6%;
+      top: 10%;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:10px 12px;
+      box-shadow: 0 18px 45px rgba(17,24,39,.12);
+      z-index:2;
+      width: 170px;
+      font-weight:800;
+      color:#2f2a56;
+    }
+    .floatBadge small{
+      display:block;
+      color:var(--muted);
+      font-weight:700;
+      margin-top:4px;
+    }
+
+    .stats{
+      margin-top: 18px;
+      background: #201f3f;
+      color:#fff;
+      padding: 18px 22px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    .stat{text-align:center; padding: 10px 8px}
+    .stat .num{
+      font-size: 40px;
+      font-weight:950;
+      letter-spacing:-.8px;
+      line-height:1;
+    }
+    .stat .lab{margin-top:6px; opacity:.9; font-weight:700}
+
+    section{padding: 26px 22px}
+    .sectionTitle{font-size: 22px; margin:0 0 10px; letter-spacing:-.2px}
+    .sectionSub{color:var(--muted); margin:0 0 16px}
+
+    .features{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 26px rgba(17,24,39,.06);
+      min-height: 120px;
+    }
+    .icon{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      background: rgba(123,99,230,.14);
+      border:1px solid rgba(123,99,230,.18);
+      margin-bottom:10px;
+    }
+    .card h3{margin:0 0 6px; font-size:16px}
+    .card p{margin:0; color:var(--muted); line-height:1.5; font-size:14px}
+
+    /* ✅ Single price section */
+    .singlePrice{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .priceBox{
+      background: linear-gradient(180deg, rgba(123,99,230,.12), rgba(123,99,230,.05));
+      border:1px solid rgba(123,99,230,.20);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 14px 30px rgba(17,24,39,.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .priceBox:before{
+      content:"";
+      position:absolute;
+      width: 220px;
+      height: 220px;
+      border-radius:50%;
+      background: rgba(123,99,230,.14);
+      right:-90px;
+      top:-90px;
+    }
+    .priceTag{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background: rgba(255,213,74,.92);
+      border:1px solid rgba(245,183,0,.55);
+      color:#2b1b00;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      position:relative;
+      z-index:1;
+    }
+    .amount{
+      position:relative;
+      z-index:1;
+      font-size: 46px;
+      font-weight: 950;
+      letter-spacing: -.8px;
+      margin: 10px 0 6px;
+      color:#1f1b3a;
+    }
+    .per{
+      position:relative;
+      z-index:1;
+      color:#4b5563;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+    .list{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+      position:relative;
+      z-index:1;
+    }
+    .list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:#374151;
+      font-weight:650;
+      font-size:13.5px;
+    }
+    .check{
+      width:18px;height:18px;border-radius:6px;
+      background: rgba(123,99,230,.14);
+      border:1px solid rgba(123,99,230,.20);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+
+    /* reviews carousel */
+    .reviewsWrap{display:grid; grid-template-columns: 1fr; gap:12px}
+    .carousel{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff, #fbfbff);
+      box-shadow: 0 14px 34px rgba(17,24,39,.08);
+      overflow:hidden;
+    }
+    .carouselTrack{display:flex; transition: transform .45s cubic-bezier(.2,.8,.2,1); will-change: transform}
+    .reviewSlide{min-width:100%; padding:18px; display:grid; gap:10px}
+    .reviewHead{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .who{display:flex; flex-direction:column; gap:2px}
+    .who b{font-size:15px}
+    .who span{color:var(--muted); font-weight:700; font-size:13px}
+    .stars{
+      font-weight:950;
+      color:#5b48cc;
+      background: rgba(123,99,230,.12);
+      border:1px solid rgba(123,99,230,.18);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .reviewText{margin:0; color:#2b2f3a; line-height:1.6; font-size:14.5px}
+    .carouselNav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 12px 14px 14px;
+      border-top:1px solid var(--line);
+      background:#fff;
+    }
+    .arrow{
+      width:44px;height:40px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      display:grid; place-items:center;
+      font-weight:900;
+      color:#2f2a56;
+    }
+    .arrow:hover{box-shadow: var(--ring)}
+    .dots{display:flex; gap:8px; justify-content:center; align-items:center; flex:1}
+    .dotBtn{
+      width:10px;height:10px;border-radius:999px;
+      border:0;
+      background: rgba(123,99,230,.22);
+      cursor:pointer;
+    }
+    .dotBtn.active{background: var(--accent)}
+    .reviewFoot{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .tinyLink{
+      font-weight:800;
+      color:#2f2a56;
+      border:1px solid var(--line);
+      background:#fff;
+      padding:9px 12px;
+      border-radius:999px;
+    }
+    .tinyLink:hover{box-shadow: var(--ring)}
+
+    .footer{
+      padding: 18px 22px 26px;
+      color:#6b7280;
+      border-top:1px solid rgba(232,231,255,.8);
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:space-between;
+      align-items:center;
+      background:#fff;
+    }
+
+    /* video modal */
+    .modalBack{
+      position:fixed; inset:0;
+      background: rgba(17,24,39,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:99;
+    }
+    .modal{
+      width:min(760px, 100%);
+      background:#fff;
+      border-radius: 20px;
+      border:1px solid rgba(232,231,255,.9);
+      box-shadow: 0 30px 90px rgba(0,0,0,.28);
+      overflow:hidden;
+    }
+    .modalTop{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background: #fbfbff;
+      font-weight:900;
+      color:#2f2a56;
+    }
+    .modalClose{
+      border:1px solid var(--line);
+      background:#fff;
+      width:40px;height:36px;border-radius:12px;
+      cursor:pointer;
+      font-weight:900;
+      color:#2f2a56;
+    }
+    .modalBody{padding:16px}
+    .thumb{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      background:#fff;
+    }
+    .thumb img{width:100%; display:block}
+    .modalNote{
+      margin:12px 0 0;
+      color:var(--muted);
+      line-height:1.5;
+      font-weight:650;
+      font-size:14px;
+    }
+    .modalActions{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    @media (max-width: 940px){
+      .heroGrid{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .singlePrice{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">Landing Page Template</div>
+
+  <div class="wrap">
+    <div class="shell">
+
+      <!-- NAV -->
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>DIỆP N. • VIETNAMESE</span>
+        </div>
+
+        <nav class="navlinks">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#pricing">Price</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="navcta">
+          <div class="pill">
+            <span class="ping"></span>
+            <span>Available • Online lessons</span>
+          </div>
+          <button class="btn" onclick="window.open('https://preply.com/en/tutor/2553268','_blank')">Book on Preply</button>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <header class="hero" id="about">
+        <div class="heroGrid">
+          <div>
+            <div class="kicker">
+              <span class="miniDot"></span>
+              <span>Structured lessons + authentic Vietnamese</span>
+            </div>
+
+            <h1>Let’s be fluent in <span class="hl">Vietnamese</span>.</h1>
+
+            <p class="sub">
+              Xin chào! I’m Diệp, a Vietnamese tutor from Vietnam, currently living in Argentina.
+              My lessons blend <b>Comprehensible Input</b>, <b>real-life conversation</b>, and <b>clear grammar support</b>
+              so you progress naturally and confidently.
+            </p>
+
+            <div class="ctaRow">
+              <button class="btn" onclick="window.open('https://preply.com/en/tutor/2553268','_blank')">Book a lesson</button>
+
+              <button class="watch" id="watchBtn" type="button">
+                <span class="playIcon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 7.5v9l8-4.5-8-4.5Z" fill="#5b48cc"/>
+                  </svg>
+                </span>
+                Watch video
+              </button>
+
+              <button class="btn btn-outline" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+                Contact
+              </button>
+            </div>
+
+            <div class="quote">
+              “Learning a language should feel joyful, human, and healing.”
+              <b>— Diệp</b>
+            </div>
+          </div>
+
+          <div class="portraitWrap">
+            <div class="portraitCircle"></div>
+
+            <div class="floatBadge">
+              5.0 ★ rating
+              <small>Encouraging • Structured</small>
+            </div>
+
+            <!-- ✅ YOUR PREPLY PROFILE PIC -->
+            <img
+              class="portrait"
+              src="https://avatars.preply.com/i/logos/i/logos/avatar_al2t8nm2t38.jpg"
+              alt="Diệp N. profile photo"
+            />
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="num">2141</div>
+            <div class="lab">lessons taught</div>
+          </div>
+          <div class="stat">
+            <div class="num">5.0</div>
+            <div class="lab">lesson rating</div>
+          </div>
+          <div class="stat">
+            <div class="num">28</div>
+            <div class="lab">public reviews</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <h2 class="sectionTitle">How we’ll learn</h2>
+        <p class="sectionSub">A calm, structured, and very practical approach, tailored to your goals.</p>
+
+        <div class="features">
+          <div class="card">
+            <div class="icon">🧠</div>
+            <h3>Comprehensible Input</h3>
+            <p>Absorb Vietnamese naturally through understandable listening and reading, even as a beginner.</p>
+          </div>
+          <div class="card">
+            <div class="icon">💬</div>
+            <h3>Real-life conversation</h3>
+            <p>Practice speaking in a patient, relaxed space where mistakes are welcome and useful.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🧱</div>
+            <h3>Structured grammar support</h3>
+            <p>Clear explanations that help you build a solid foundation and speak with confidence.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ✅ SINGLE PRICE -->
+      <section id="pricing">
+        <h2 class="sectionTitle">Price</h2>
+        <p class="sectionSub">One simple price, the same for all lesson focuses (beginner, conversation, heritage).</p>
+
+        <div class="singlePrice">
+          <div class="card">
+            <div class="icon">🎯</div>
+            <h3>What you can work on</h3>
+            <p>We pick the focus based on your goals and adjust it anytime.</p>
+            <ul class="list" style="margin-top:12px">
+              <li><span class="check">✓</span>Beginner foundations (sounds, tones, questions)</li>
+              <li><span class="check">✓</span>Conversation & fluency projects</li>
+              <li><span class="check">✓</span>Heritage support + reading/writing</li>
+              <li><span class="check">✓</span>Homework + feedback</li>
+            </ul>
+          </div>
+
+          <div class="priceBox">
+            <div class="priceTag">USD</div>
+            <div class="amount">$35</div>
+            <div class="per">per 50-minute lesson</div>
+            <ul class="list">
+              <li><span class="check">✓</span>Personalized plan</li>
+              <li><span class="check">✓</span>Structured materials</li>
+              <li><span class="check">✓</span>Supportive correction</li>
+            </ul>
+            <div class="ctaRow" style="margin-top:14px">
+              <button class="btn" onclick="window.open('https://preply.com/en/tutor/2553268','_blank')">Book on Preply</button>
+              <button class="btn btn-outline" onclick="document.querySelector('#reviews').scrollIntoView({behavior:'smooth'})">See reviews</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEWS (CAROUSEL) -->
+      <section id="reviews">
+        <h2 class="sectionTitle">Student reviews</h2>
+        <p class="sectionSub">Swipe or use arrows to browse.</p>
+
+        <div class="reviewsWrap">
+          <div class="carousel" aria-roledescription="carousel">
+            <div class="carouselTrack" id="reviewsTrack"></div>
+
+            <div class="carouselNav">
+              <button class="arrow" id="prevBtn" aria-label="Previous review">‹</button>
+
+              <div class="dots" id="dots"></div>
+
+              <div class="reviewFoot">
+                <button class="arrow" id="nextBtn" aria-label="Next review">›</button>
+                <a class="tinyLink" href="https://preply.com/en/tutor/2553268" target="_blank" rel="noopener">
+                  View all reviews on Preply
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div style="color:#6b7280;font-weight:650;font-size:13px;line-height:1.5">
+            Want *all 28* reviews in this carousel? Paste the remaining review texts here (or copy from Preply) and I’ll add them.
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2 class="sectionTitle">Contact</h2>
+        <p class="sectionSub">Fastest way: message or book directly on Preply.</p>
+
+        <div class="features">
+          <div class="card">
+            <div class="icon">📩</div>
+            <h3>Send a message</h3>
+            <p>Tell me your goals and your current level. I’ll suggest a plan and materials.</p>
+            <div class="ctaRow" style="margin-top:12px">
+              <button class="btn" onclick="window.open('https://preply.com/en/tutor/2553268','_blank')">Message on Preply</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="icon">🗓️</div>
+            <h3>Book a lesson</h3>
+            <p>Choose a time that fits your schedule and we’ll start building your Vietnamese.</p>
+            <div class="ctaRow" style="margin-top:12px">
+              <button class="btn" onclick="window.open('https://preply.com/en/tutor/2553268','_blank')">Book now</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="icon">🌎</div>
+            <h3>Languages I speak</h3>
+            <p>Vietnamese (Native), English (C2), Spanish (B1), Chinese (A2), Korean (A1).</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <div>© <span id="year"></span> Diệp N. • Vietnamese tutoring</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap">
+          <a href="#about">About</a>
+          <a href="#pricing">Price</a>
+          <a href="#reviews">Reviews</a>
+          <a href="https://preply.com/en/tutor/2553268" target="_blank" rel="noopener">Preply Profile</a>
+        </div>
+      </div>
+
+<section id="availability">
+  <h2 class="sectionTitle">Availability</h2>
+  <p class="sectionSub">See my current open times (auto-updated).</p>
+
+  <div class="card" style="padding:0; overflow:hidden">
+    <iframe
+      src="https://calendar.google.com/calendar/embed?src=q00n1016pkf2har3ql285f0aqo@group.calendar.google.com
+&ctz=America/Argentina/Buenos_Aires&mode=WEEK"
+      style="border:0; width:100%; height:620px"
+      frameborder="0"
+      scrolling="no"
+      title="Availability Calendar"
+    ></iframe>
+  </div>
+</section>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- VIDEO MODAL (reliable: opens Preply where the video actually plays) -->
+  <div class="modalBack" id="videoModalBack" role="dialog" aria-modal="true" aria-label="Video modal">
+    <div class="modal">
+      <div class="modalTop">
+        <div>Watch my Preply intro video</div>
+        <button class="modalClose" id="closeModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody">
+        <div class="thumb">
+          <!-- Thumbnail (can change if you have a better one) -->
+          <img src="https://avatars.preply.com/i/video_thumbnails/36c29f28-8047-488b-8478-7c53fcfeb9f6.png" alt="Video thumbnail"/>
+        </div>
+        <p class="modalNote">
+          Preply serves the intro video dynamically, so a direct embed often won’t play reliably.
+          Click “Play on Preply” to open your profile and play the video there.
+        </p>
+        <div class="modalActions">
+          <button class="btn btn-outline" id="modalCopyLink">Copy Preply link</button>
+          <button class="btn" id="modalOpenPreply">Play on Preply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reviews carousel data (add more to reach all 28)
+    const reviews = [
+      {
+        name: "Marie",
+        date: "December 4, 2025",
+        rating: 5,
+        text: "If you want to learn Vietnamese, don't hesitate for a second to take lessons with Diệp! She adapts to our needs, is very dynamic, makes us practice a lot, and does so with a good mood."
+      },
+      {
+        name: "Duy",
+        date: "June 20, 2025 (edited)",
+        rating: 5,
+        text: "Diep is an excellent teacher who makes the lessons varied and motivating. She challenges me specifically so that I can speak the language even better. The lessons are a lot of fun with her - Thank you very much."
+      },
+      {
+        name: "van",
+        date: "April 25, 2025 (edited)",
+        rating: 5,
+        text: "Diệp is an excellent tutor who is so patient, effusive, fun, relatable, personable, and prepared to guide you through learning Vietnamese... Highly recommend, it's been a true delight so far!"
+      },
+      {
+        name: "Juan",
+        date: "March 7, 2025",
+        rating: 5,
+        text: "Amazing teacher, she puts a lot on the class preparation, makes great exercises to practice, is very patient and generous."
+      },
+      {
+        name: "Kelly",
+        date: "February 7, 2025",
+        rating: 5,
+        text: "Diệp is an incredible tutor! She's a fantastic conversation partner and I learn so much with her... Highly recommend her to anyone looking to learn!"
+      },
+      {
+        name: "Caity",
+        date: "December 17, 2024",
+        rating: 5,
+        text: "I love learning with Diệp! My Vietnamese has progressed enormously... I highly recommend working with her!"
+      }
+    ];
+
+    // Build carousel
+    const track = document.getElementById('reviewsTrack');
+    const dotsWrap = document.getElementById('dots');
+
+    function starString(n){
+      return "★".repeat(n) + "☆".repeat(Math.max(0, 5-n));
+    }
+
+    reviews.forEach((r, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'reviewSlide';
+      slide.innerHTML = `
+        <div class="reviewHead">
+          <div class="who">
+            <b>${r.name}</b>
+            <span>${r.date}</span>
+          </div>
+          <div class="stars" aria-label="${r.rating} out of 5">
+            ${starString(r.rating)}
+          </div>
+        </div>
+        <p class="reviewText">${r.text}</p>
+      `;
+      track.appendChild(slide);
+
+      const dot = document.createElement('button');
+      dot.className = 'dotBtn' + (i===0 ? ' active' : '');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to review ${i+1}`);
+      dot.addEventListener('click', () => goTo(i, true));
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = [...document.querySelectorAll('.dotBtn')];
+    let index = 0;
+    let autoTimer = null;
+
+    function paint(){
+      track.style.transform = `translateX(${-index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i===index));
+    }
+    function goTo(i, userAction=false){
+      index = (i + reviews.length) % reviews.length;
+      paint();
+      if(userAction) restartAuto();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(index-1, true));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(index+1, true));
+
+    // Auto-advance
+    function restartAuto(){
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(index+1, false), 6500);
+    }
+    restartAuto();
+
+    // Swipe support
+    let startX = null;
+    track.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+    track.addEventListener('pointerup', (e) => {
+      if(startX === null) return;
+      const dx = e.clientX - startX;
+      if(Math.abs(dx) > 40){
+        goTo(index + (dx < 0 ? 1 : -1), true);
+      }
+      startX = null;
+    });
+
+    // Watch video modal (opens Preply reliably)
+    const modalBack = document.getElementById('videoModalBack');
+    const openBtn = document.getElementById('watchBtn');
+    const closeBtn = document.getElementById('closeModal');
+    const openPreplyBtn = document.getElementById('modalOpenPreply');
+    const copyBtn = document.getElementById('modalCopyLink');
+    const preplyUrl = "https://preply.com/en/tutor/2553268";
+
+    function openModal(){
+      modalBack.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modalBack.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modalBack.addEventListener('click', (e) => { if(e.target === modalBack) closeModal(); });
+    window.addEventListener('keydown', (e) => { if(e.key === "Escape") closeModal(); });
+
+    openPreplyBtn.addEventListener('click', () => {
+      window.open(preplyUrl, '_blank', 'noopener');
+      closeModal();
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(preplyUrl);
+        copyBtn.textContent = "Copied!";
+        setTimeout(()=> copyBtn.textContent = "Copy Preply link", 1400);
+      }catch(err){
+        prompt("Copy this link:", preplyUrl);
+      }
+    });
+  </script>
+</body>
+</html>
